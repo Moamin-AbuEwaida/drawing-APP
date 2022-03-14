@@ -27,6 +27,26 @@ window.addEventListener('load', ()=>{
         ctx.beginPath();
         ctx.moveTo(e.clientX, e.clientY);
     }
+
+    const eStartPosition= (ev)=>{
+        painting = true;
+        draw(e);
+    };
+    const eFinishPosition= (ev)=>{
+        painting = false;
+        ctx.beginPath();
+    }
+    const eDraw=(ev)=>{
+        if(!painting)return;
+        ctx.lineWidth = 10;
+        ctx.lineCap = 'round';
+
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX, e.clientY);
+    }
+
     const clear =()=>{
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -35,9 +55,9 @@ window.addEventListener('load', ()=>{
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', finishPosition);
     canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('touchstart', startPosition,false);
-    canvas.addEventListener('touchend', finishPosition, false);
-    canvas.addEventListener('touchmove', draw, false);
+    canvas.addEventListener('touchstart', eStartPosition);
+    canvas.addEventListener('touchend', eFinishPosition);
+    canvas.addEventListener('touchmove', eDraw);
     canvas.addEventListener('dblclick', clear);
 
 })
