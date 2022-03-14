@@ -35,6 +35,9 @@ window.addEventListener('load', ()=>{
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', finishPosition);
     canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('touchstart', startPosition);
+    canvas.addEventListener('touchend', finishPosition);
+    canvas.addEventListener('touchmove', draw);
     canvas.addEventListener('dblclick', clear);
 
 })
